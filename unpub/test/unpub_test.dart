@@ -111,8 +111,7 @@ main() {
 
     test('no readme and changelog', () async {
       var version = '1.0.0-noreadme';
-      var result = await pubPublish(package0, version);
-      // expect(result.stderr, ''); // Suggestions:
+      await pubPublish(package0, version);
 
       var meta = await _readMeta(package0);
 

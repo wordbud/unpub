@@ -1,6 +1,6 @@
 import 'dart:convert';
+import 'package:angular/angular.dart';
 import 'package:http/http.dart' as http;
-import 'package:angular/core.dart';
 import 'package:unpub_web/constants.dart';
 import 'src/routes.dart';
 import 'package:unpub_api/models.dart';
@@ -45,14 +45,18 @@ class AppService {
     return data['data'];
   }
 
-  Future<ListApi> fetchPackages(
-      {int size, int page, String sort, String q}) async {
+  Future<ListApi> fetchPackages({
+    int? size,
+    int? page,
+    String? sort,
+    String? q,
+  }) async {
     var res = await _fetch(
         '/webapi/packages', {'size': size, 'page': page, 'sort': sort, 'q': q});
     return ListApi.fromJson(res);
   }
 
-  Future<WebapiDetailView> fetchPackage(String name, String version) async {
+  Future<WebapiDetailView> fetchPackage(String name, String? version) async {
     version = version ?? 'latest';
     var res = await _fetch('/webapi/package/$name/$version');
     return WebapiDetailView.fromJson(res);
